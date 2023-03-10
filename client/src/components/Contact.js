@@ -1,58 +1,77 @@
 import React, { useState } from "react";
-import { init, send } from 'emailjs-com';
-import {useNavigate} from 'react-router-dom';
+import domain from '../util/domain';
+import axios from 'axios';
 
 
-init("user_aVYjm0EyJd5tmVUPL2ulP");
 
 
 
 export default function Contact() {
-  const [toSend, setToSend] = useState({
-    from_name: '',
-    to_name: '',
-    message: '',
-  });
-  const navigate = useNavigate();
-  const onSubmit = (e) => {
-    e.preventDefault();
-    send(
-      'service_uvfabt7',
-      'template_of2kh2g',
-      toSend,
-      'user_aVYjm0EyJd5tmVUPL2ulP'
-    )
-      .then((response) => {
-        console.log('SUCCESS!', response.status, response.text);
-        navigate('/messageSent');
-      })
-      .catch((err) => {
-        console.log('FAILED...', err);
-      });
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [message, setMessage] = useState("");
+  const [status, setStatus] = useState("Send");
+
+  const handleNameInput = (e) => {
+    setName(e.target.value);
+  };
+  
+  const handleEmailInput = (e) => {
+    setEmail(e.target.value);
   };
 
-  const handleChange = (e) => {
-    setToSend({ ...toSend, [e.target.name]: e.target.value });
+  const handleMessageInput = (e) => {
+    setMessage(e.target.value);
+  };
+
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setStatus("Sending...");
+    const data = {
+      name,
+      email,
+      message,
+    };
+
+    try {
+      let response = await axios.post(`${domain}/send`, data);
+      console.log(response.status);
+      if (response.status === 200) {
+        setEmail("");
+        setName("");
+        setMessage("");
+        setStatus("Send");
+        alert(response.data)
+      } else if (response.status !== 200) {
+        setStatus("Send");
+        alert("Message failed to send.");
+      }
+    } catch (error) {
+      setStatus("Send");
+      console.log(error);
+      alert("Message failed to send.");
+    }
   };
   return (
     
 <>
-<form className='upward-form' onSubmit={onSubmit}>
+<form className='upward-form' onSubmit={handleSubmit}>
 <h3>Contact us using the form below. We will reach back out to you within 24 hours.</h3>
     <div className="container text-center">
     <div className='form-floating mb-3 w-100'>
-  <input type="text" name='from_name' className="form-control" value={toSend.from_name} onChange={handleChange}/>
-  <label htmlFor='from_name'>Email</label>
+  <input type="text" id='email' className="form-control" value={email} onChange={handleEmailInput} required/>
+  <label htmlFor='email'>Email</label>
 </div>
 <div className='form-floating mb-3 w-100'>
-  <input type="text" name='to_name' className="form-control" value={toSend.to_name} onChange={handleChange}/>
-  <label htmlFor="form-label">Name</label>
+  <input type="text" id='name' className="form-control" value={name} onChange={handleNameInput} required/>
+  <label htmlFor="name">Name</label>
 </div>
 <div className='form-floating mb-3 w-100'>
-  <textarea type="text" name='message' className="form-control" value={toSend.message} onChange={handleChange}/>
-  <label htmlFor="form-label">Your message</label>
+  <textarea type="text" id='message' className="form-control" value={message} onChange={handleMessageInput} required/>
+  <label htmlFor="message">Your message</label>
 </div>
-<button type='submit' className='btn btn-success w-50'>Send</button>  
+<button type='submit' className='btn btn-success w-50'>{status}</button>  
     </div>
 </form>
 </>

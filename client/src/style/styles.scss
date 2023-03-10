@@ -1,42 +1,38 @@
 * {
   color: rgb(255, 255, 255);
-  letter-spacing: 3px;
+  
 }
 
 body {
-  background-image:url("../earth.jpeg");
-  background-size: cover;
+  background-color: #000;
 }
 
 .navbar {
-  padding-top: 15px;
-  padding-bottom: 15px;
   margin-bottom: 0;
   font-size: 1em;
-  background-color: #000;
-
-}
-
-.container{
-  // background: rgb(255, 255, 255);
-  // background: rgba(255, 255, 255, 0.5);
-  z-index: 1;
-  margin-top: 50px;
-  margin-bottom: 150px;
-  border-radius: 25px;
-  padding: 20px 20px 20px 20px;
-  max-width: 550px;
-  font-size: larger;
-}
-
-.home-vision {
-  display: flex;
-  justify-content: center;
-  text-align: justify;
-  align-items: center;
-  flex-direction: column;
-  height: 100vh;
   font-weight: bold;
+}
+
+.stock-img{
+  height: 100%;
+  width: 100%;
+}
+
+.screenshot {
+  height: 400px;
+  width: 100%;
+  border: #fff;
+  border-style: solid;
+  border-width: 5px;
+}
+
+.home-cta {
+  padding-left: 10%;
+  padding-top: 10%;
+}
+
+.container {
+  padding-top: 5%;
 }
 
 .upward-form {
@@ -63,6 +59,9 @@ body {
  
   button {
     background: linear-gradient(to right, #1abc9c, #337bbf);
+    border-radius: 25px;
+    height: 40px;
+    width: 150px;
   }
   
   label {
@@ -74,9 +73,12 @@ body {
   }
   
   .footer {
-    position: sticky;
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
     text-align: center;
-    height: 60px;
+    
   }
   
   .about-us {
