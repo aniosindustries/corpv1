@@ -18,6 +18,30 @@ body {
   width: 100%;
 }
 
+.blobverde {
+  height: 62.32686980609418vh;
+  width: 19.53125vw;
+  box-shadow: 0 8px 32px 0 rgba(26, 188, 156, 0.37);
+  backdrop-filter: blur( 4px );
+  -webkit-backdrop-filter: blur( 4px );
+  border-radius: 10px;
+}
+
+.blob-test{
+  background-image: url('../blob4dialogverde.svg');
+  background-repeat: no-repeat;
+  background-size: contain;
+}
+
+.blobazul {
+  
+  box-shadow: 0 8px 32px 0 rgba( 31, 38, 135, 0.37 );
+  backdrop-filter: blur( 4px );
+  -webkit-backdrop-filter: blur( 4px );
+  border-radius: 10px;
+  border: 1px solid rgba( 255, 255, 255, 0.18 );
+}
+
 .screenshot {
   height: 400px;
   width: 100%;
@@ -62,6 +86,7 @@ body {
     border-radius: 25px;
     height: 40px;
     width: 150px;
+    border: none;
   }
   
   label {

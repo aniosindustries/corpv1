@@ -9,9 +9,8 @@ dotenv.config();
 
 const app = express();
 
-app.use(express.json());
 app.use(cors({
-    origin: ['http://localhost:3000', 'http://aniosindustries.com'],
+    origin: [ 'http://localhost:3000', 'https://aniosindustries.com' ],
 }));
 
 
@@ -24,10 +23,7 @@ app.get('/', function(req, res) {
     res.sendFile(__dirname + '/index.html');
   });
 
-const PORT = process.env.NODE_ENV || 9000;
-app.listen(PORT, () => {
-    console.log('Server started on port ' + PORT);
-});
+const PORT = process.env.PORT || 9000;
 
 app.post('/send', function(req, res) {
     const name = req.body.name;
@@ -57,8 +53,14 @@ app.post('/send', function(req, res) {
         res.send('Error: Your message could not be sent.');
       } else {
         console.log('Email sent: ' + info.response);
-        res.send('Thank you for your message!');
+        res.send('Your message was sent. Thank you!');
       }
     });
   });
+
+app.listen(PORT, () => {
+    console.log('Server started on port ' + PORT);
+});
+
+
   

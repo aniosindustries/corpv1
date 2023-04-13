@@ -1,1 +1,1 @@
-export default process.env.NODE_ENV === 'development' ? 'http://localhost:9000' : process.env.NODE_ENV === 'production' && 'https://aniosindustries.herokuapp.com/';
+export default process.env.NODE_ENV === 'production' ? 'https://aniosindustries.herokuapp.com' : 'http://localhost:9000';
